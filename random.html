@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      max-width: 380px;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #555;
+      font-size: 17px;
+      margin-bottom: 25px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 70px;
+    }
+
+    button {
+      padding: 12px 26px;
+      font-size: 16px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      position: absolute;
+      transition: 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #noBtn {
+      background: #ddd;
+      color: #333;
+      left: 10%;
+    }
+
+    .love {
+      display: none;
+      font-size: 22px;
+      color: #ff4d6d;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+
+    <h1>Hey Manasvi 💕</h1>
+    <p>
+      I wanted to ask you something<br>
+      in a way that’s a little different 😌<br><br>
+      Will you be my Valentine? 🌹
+    </p>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 🙄</button>
+    </div>
+
+    <div class="love" id="loveMsg">
+      Yayyy! 💘<br>
+      Happy Valentine’s Day, Mannuu ❤️
+    </div>
+
+    <!-- Playful romantic music -->
+    <audio id="music">
+      <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
+
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const loveMsg = document.getElementById("loveMsg");
+    const music = document.getElementById("music");
+
+    noBtn.addEventListener("mouseover", () => {
+      noBtn.style.left = Math.random() * 240 + "px";
+      noBtn.style.top = Math.random() * 90 + "px";
+    });
+
+    yesBtn.addEventListener("click", () => {
+      loveMsg.style.display = "block";
+      yesBtn.style.display = "none";
+      noBtn.style.display = "none";
+      music.play();
+    });
+  </script>
+
+</body>
+</html>
