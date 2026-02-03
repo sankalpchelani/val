@@ -63,12 +63,17 @@
       left: 10%;
     }
 
-    .love {
-      display: none;
-      font-size: 22px;
+    .second-text {
+      font-size: 18px;
       color: #ff4d6d;
-      margin-top: 20px;
       font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .dog {
+      width: 220px;
+      margin: 15px auto;
+      border-radius: 15px;
     }
   </style>
 </head>
@@ -76,24 +81,36 @@
 
   <div class="card">
 
-    <h1>Hey Manasvi 💕</h1>
-    <p>
-      I wanted to ask you something<br>
-      in a way that’s a little different 😌<br><br>
-      Will you be my Valentine? 🌹
-    </p>
+    <!-- First page -->
+    <div id="firstPage">
+      <h1>Hey Manasvi 💕</h1>
+      <p>
+        I wanted to ask you something<br>
+        in a way that’s a little different 😌<br><br>
+        Will you be my Valentine? 🌹
+      </p>
 
-    <div class="buttons">
-      <button id="yesBtn">Yes 💖</button>
-      <button id="noBtn">No 🙄</button>
+      <div class="buttons">
+        <button id="yesBtn">Yes 💖</button>
+        <button id="noBtn">No 🙄</button>
+      </div>
     </div>
 
-    <div class="love" id="loveMsg">
-      Yayyy! 💘<br>
-      Happy Valentine’s Day, Mannuu ❤️
+    <!-- Second page -->
+    <div id="secondPage" style="display:none;">
+      <div class="second-text">
+        Yes Mannu 😌 I knew aap acchi choice karogey .<br>
+        Okay bye…assi tussi lassi pussi 💖love you  💕💕
+      </div>
+
+      <img
+        class="dog"
+        src="https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074_960_720.jpg"
+        alt="Cute dog being loved"
+      >
     </div>
 
-    <!-- Playful romantic music -->
+    <!-- Music -->
     <audio id="music">
       <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
     </audio>
@@ -103,8 +120,10 @@
   <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
-    const loveMsg = document.getElementById("loveMsg");
     const music = document.getElementById("music");
+
+    const firstPage = document.getElementById("firstPage");
+    const secondPage = document.getElementById("secondPage");
 
     noBtn.addEventListener("mouseover", () => {
       noBtn.style.left = Math.random() * 240 + "px";
@@ -112,9 +131,8 @@
     });
 
     yesBtn.addEventListener("click", () => {
-      loveMsg.style.display = "block";
-      yesBtn.style.display = "none";
-      noBtn.style.display = "none";
+      firstPage.style.display = "none";
+      secondPage.style.display = "block";
       music.play();
     });
   </script>
