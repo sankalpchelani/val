@@ -13,6 +13,7 @@
       justify-content: center;
       align-items: center;
       font-family: "Poppins", sans-serif;
+      overflow: hidden;
     }
 
     .card {
@@ -22,6 +23,8 @@
       text-align: center;
       box-shadow: 0 20px 40px rgba(0,0,0,0.25);
       max-width: 380px;
+      position: relative;
+      z-index: 2;
     }
 
     h1 {
@@ -47,7 +50,6 @@
       border-radius: 25px;
       cursor: pointer;
       position: absolute;
-      transition: 0.3s ease;
     }
 
     #yesBtn {
@@ -75,6 +77,26 @@
       margin: 15px auto;
       border-radius: 15px;
     }
+
+    /* CONFETTI */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      animation: pop 1.2s ease-out forwards;
+      z-index: 1;
+    }
+
+    @keyframes pop {
+      0% {
+        transform: translate(0,0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) rotate(540deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -99,14 +121,14 @@
     <!-- Second page -->
     <div id="secondPage" style="display:none;">
       <div class="second-text">
-        Yes Mannu 😌 I knew aap acchi choice karogey .<br>
-        Okay bye…assi tussi lassi pussi 💖love you  💕💕
+        Yes 😌 I knew you’d make a good choice.<br>
+        Okay bye… you look like the animal below 🐶😂
       </div>
 
       <img
         class="dog"
         src="https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074_960_720.jpg"
-        alt="Cute dog being loved"
+        alt="Cute dog"
       >
     </div>
 
@@ -118,22 +140,50 @@
   </div>
 
   <script>
-    const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
-    const music = document.getElementById("music");
-
+    const noBtn = document.getElementById("noBtn");
     const firstPage = document.getElementById("firstPage");
     const secondPage = document.getElementById("secondPage");
+    const music = document.getElementById("music");
 
     noBtn.addEventListener("mouseover", () => {
       noBtn.style.left = Math.random() * 240 + "px";
       noBtn.style.top = Math.random() * 90 + "px";
     });
 
+    function burst(x, y) {
+      const colors = ["#ff4d6d", "#ffd166", "#06d6a0", "#118ab2", "#ef476f"];
+
+      for (let i = 0; i < 50; i++) {
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        c.style.left = x + "px";
+        c.style.top = y + "px";
+        c.style.setProperty("--x", `${Math.random()*600 - 300}px`);
+        c.style.setProperty("--y", `${Math.random()*500 - 250}px`);
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 1200);
+      }
+    }
+
     yesBtn.addEventListener("click", () => {
-      firstPage.style.display = "none";
-      secondPage.style.display = "block";
-      music.play();
+
+      // rapid repeating pops
+      let count = 0;
+      const interval = setInterval(() => {
+        burst(0, window.innerHeight / 2);                 // left
+        burst(window.innerWidth, window.innerHeight / 2); // right
+        burst(window.innerWidth / 2, 0);                  // top
+        count++;
+        if (count === 6) clearInterval(interval);         // ~4 seconds
+      }, 600);
+
+      setTimeout(() => {
+        firstPage.style.display = "none";
+        secondPage.style.display = "block";
+        music.play();
+      }, 1800);
     });
   </script>
 
